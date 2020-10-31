@@ -1,26 +1,45 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.1": {}
+    ".NETCoreApp,Version=v3.1": {
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETStandard,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/Domain.csproj",
+      "msbuildProject": "../Domain/Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.1": []
+    ".NETCoreApp,Version=v3.1": [
+      "Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
-    "C:\\Users\\Entra21\\.nuget\\packages\\": {}
+    "C:\\Users\\entra21\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "P:\\dev\\vinícius C#Noturno\\Works\\FirstWork\\WebAPI\\WebAPI.csproj",
+      "projectUniqueName": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\WebAPI\\WebAPI.csproj",
       "projectName": "WebAPI",
-      "projectPath": "P:\\dev\\vinícius C#Noturno\\Works\\FirstWork\\WebAPI\\WebAPI.csproj",
-      "packagesPath": "C:\\Users\\Entra21\\.nuget\\packages\\",
-      "outputPath": "P:\\dev\\vinícius C#Noturno\\Works\\FirstWork\\WebAPI\\obj\\",
+      "projectPath": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\WebAPI\\WebAPI.csproj",
+      "packagesPath": "C:\\Users\\entra21\\.nuget\\packages\\",
+      "outputPath": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\WebAPI\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Entra21\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\entra21\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -32,7 +51,11 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj": {
+              "projectPath": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
