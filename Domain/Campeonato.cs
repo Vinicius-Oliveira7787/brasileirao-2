@@ -4,8 +4,9 @@ namespace Domain
 {
     public class Campeonato
     {
-        public List<Time> Times { get; private set; }
+        private List<Time> _times { get; set; }
         public bool InicioDoCampeonato = false;
+        public List<Partida> Partidas { get; private set; }
 
         public bool CriarTimes(List<Time> times)
         {
@@ -19,7 +20,19 @@ namespace Domain
                 return false;
             }
 
+            _times = times;
             return true;
+        }
+
+        public void GerarRodada()
+        {
+            var times = new int[4,2];
+
+            for (int i = 0; i < length; i++)
+            {
+                
+            }
+            
         }
     }
 }
