@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\Tests.csproj": {}
+    "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\Tests.csproj": {}
   },
   "projects": {
-    "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj": {
+    "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj",
+        "projectUniqueName": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj",
+        "projectPath": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\entra21\\.nuget\\packages\\",
-        "outputPath": "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\obj\\",
+        "outputPath": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\entra21\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,14 +59,14 @@
         }
       }
     },
-    "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\Tests.csproj": {
+    "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\Tests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\Tests.csproj",
+        "projectUniqueName": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\Tests.csproj",
         "projectName": "Tests",
-        "projectPath": "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\Tests.csproj",
+        "projectPath": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\Tests.csproj",
         "packagesPath": "C:\\Users\\entra21\\.nuget\\packages\\",
-        "outputPath": "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\obj\\",
+        "outputPath": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Tests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\entra21\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -82,8 +82,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj": {
-                "projectPath": "p:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj"
+              "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj": {
+                "projectPath": "P:\\dev\\vinícius C#Noturno\\brasileirao-2\\Domain\\Domain.csproj"
               }
             }
           }
