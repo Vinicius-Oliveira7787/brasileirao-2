@@ -12,6 +12,13 @@ namespace WebAPI.Controllers
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
+        public readonly UsersService _usersService;
+
+        public UsersController()
+        {
+            _usersService = new UsersService();
+        }
+
         [HttpPost]
         public IActionResult Post(CreateUserRequest request)
         {
@@ -20,9 +27,9 @@ namespace WebAPI.Controllers
                 // return status
                 return Unauthorized();
             }
-
-            var user = new User(request.Name, request.Profile).Id;
-            return Ok(user);
+            
+            var userId = _usersService.Create(request.Name, request.Profile);
+            return Ok(userId);
         }
     }
 }

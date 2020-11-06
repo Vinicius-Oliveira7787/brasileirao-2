@@ -24,14 +24,8 @@ namespace Domain
             return true;
         }
 
-        public void GerarRodada()
+        public void GerarPartida()
         {
-            var times = new int[4,2];
-
-            for (int i = 0; i < length; i++)
-            {
-                
-            }
             
         }
     }
