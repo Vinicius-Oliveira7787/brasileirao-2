@@ -5,5 +5,7 @@ namespace Domain
         public TimeVisitante TimeVisitante{ get; private set; }
 
         public TimeCasa TimeDaCasa{ get; private set; }
+
+        
     }
 }

@@ -24,9 +24,15 @@ namespace Domain
             return true;
         }
 
-        public void GerarPartida()
+        public void GerarPartida(Time casa, Time visitante)
         {
             
+        }
+
+        public void AdicionarResultadoDaPartida()
+        {
+            new Partida().TimeDaCasa.FazerGol();
+            new Partida().TimeVisitante.FazerGol();
         }
     }
 }
