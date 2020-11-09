@@ -6,6 +6,10 @@ namespace Domain
 
         public TimeCasa TimeDaCasa{ get; private set; }
 
-        
+        public Partida(TimeCasa casa, TimeVisitante visitante)
+        {
+            this.TimeDaCasa = casa;
+            this.TimeVisitante = visitante;
+        }
     }
 }
