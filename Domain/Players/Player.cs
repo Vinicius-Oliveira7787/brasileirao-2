@@ -2,15 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Domain.Users
+namespace Domain.Players
 {
-    public class User
+    public class Player
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
-        public string Name { get; set; }
-        public Profile Profile { get; set; }
+        public Guid Id { get; private set; } = Guid.NewGuid();
+        public string Name { get; private set; }
+        public int Goals { get; private set; }
 
-        public User(string name, Profile profile)
+        public Player(string name)
         {
             Name = name;
         }
@@ -42,7 +42,7 @@ namespace Domain.Users
 
             return true;
         }
-
+    
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
@@ -50,7 +50,6 @@ namespace Domain.Users
             {
                 errors.Add("Nome inválido.");
             }
-
             return (errors, errors.Count == 0);
         }
     }

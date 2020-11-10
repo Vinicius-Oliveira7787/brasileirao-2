@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain;
+using Domain.Users;
 
 namespace WebAPI.Controllers.Users
 {

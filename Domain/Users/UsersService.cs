@@ -1,21 +1,27 @@
 using System;
+using System.Linq;
 
-namespace Domain
+namespace Domain.Users
 {
     public class UsersService
     {
         public CreatedUserDTO Create(string name, Profile profile)
         {
             var user = new User(name, profile);
-            var createdUser = user.Validate();
+            var userValidation = user.Validate();
 
-            if (createdUser.isValid)
+            if (userValidation.isValid)
             {
                 UsersRepository.Add(user);
                 return new CreatedUserDTO(user.Id);
             }
 
-            return new CreatedUserDTO(createdUser.errors);
+            return new CreatedUserDTO(userValidation.errors);
+        }
+        
+        public User GetById(Guid id)
+        {
+            return UsersRepository.Users.FirstOrDefault(x => x.Id == id);
         }
     }
 }
