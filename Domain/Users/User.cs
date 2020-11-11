@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,6 +13,7 @@ namespace Domain.Users
         public User(string name, Profile profile)
         {
             Name = name;
+            Profile = profile;
         }
 
         private bool ValidateName()
@@ -42,7 +43,7 @@ namespace Domain.Users
 
             return true;
         }
-
+    
         public (IList<string> errors, bool isValid) Validate()
         {
             var errors = new List<string>();
@@ -50,7 +51,6 @@ namespace Domain.Users
             {
                 errors.Add("Nome inválido.");
             }
-
             return (errors, errors.Count == 0);
         }
     }

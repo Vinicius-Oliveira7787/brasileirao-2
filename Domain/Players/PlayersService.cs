@@ -1,4 +1,4 @@
-namespace Domain.Players
+﻿namespace Domain.Players
 {
     public class PlayersService
     {
