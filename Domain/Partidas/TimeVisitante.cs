@@ -2,17 +2,17 @@ namespace Domain
 {
     public class TimeVisitante
     {
-        public Time TimeForaDeCasa { get; private set; }
-        public int TimeCasaGols { get; private set; } = 0;
+        public Time TeamVisitante { get; private set; }
+        public int TimeVisitanteGols { get; private set; } = 0;
 
         public TimeVisitante(Time timeCasa)
         {
-            this.TimeForaDeCasa = timeCasa;
+            this.TeamVisitante = timeCasa;
         }
 
         public void FazerGol()
         {
-            this.TimeCasaGols++;
+            this.TimeVisitanteGols++;
         }
     }
 }
