@@ -25,9 +25,12 @@ namespace Domain
             return true;
         }
 
-        public void GerarPartida(Time casa, Time visitante)
+        private void GerarPartida(Time casa, Time visitante)
         {
+            var teamCasa = new TimeCasa(casa);
+            var teamVisitante = new TimeVisitante(visitante);
             
+            Partidas.Add(new Partida(teamCasa, teamVisitante));
         }
 
         public void AdicionarResultadoDaPartida(string timeHouse, int timeHouseGols, string timeAway, int timeAwayGols)
@@ -35,14 +38,11 @@ namespace Domain
             var timeCasa = _times.FirstOrDefault(time => time.Name == timeHouse);
             var timeVisitante = _times.FirstOrDefault(time => time.Name == timeAway);
 
-            var casa = new TimeCasa(timeCasa);
-            var visitante = new TimeVisitante(timeVisitante);
-
-            Partidas.Add(new Partida(casa, visitante));
+            GerarPartida(timeCasa, timeVisitante);
 
             for (int i = 0; i < timeHouseGols; i++)
             {
-                casa.FazerGol();
+                timeCasa.FazerGol();
             }
 
             for (int i = 0; i < timeAwayGols; i++)

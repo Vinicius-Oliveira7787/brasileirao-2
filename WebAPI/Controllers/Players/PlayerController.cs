@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Players;
 using Microsoft.Extensions.Primitives;
-using Domain.Users;
 using System;
 using Microsoft.AspNetCore.Authentication;
+using Domain.Users;
 
 namespace WebAPI.Controllers.Players
 {
