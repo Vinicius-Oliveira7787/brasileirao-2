@@ -28,7 +28,7 @@ namespace Domain
 
         public Partida MostradorDePartida(TimeCasa casa, TimeVisitante visitante)
         {
-            return _partidas.FirstOrDefault(time => time.TimeDaCasa == casa && time.TimeVisitante == visitante);
+            return _partidas.FirstOrDefault(time => time.Casa == casa && time.Visitante == visitante);
         }
 
         public void AdicionarResultadoDaPartida(string timeHouse, int timeHouseGols, string timeAway, int timeAwayGols)
@@ -39,7 +39,7 @@ namespace Domain
             var teamCasa = new TimeCasa(timeCasa);
             var teamVisitante = new TimeVisitante(timeVisitante);
             
-            var verification = _partidas.FirstOrDefault(time => time.TimeDaCasa == teamCasa && time.TimeVisitante == teamVisitante);
+            var verification = _partidas.FirstOrDefault(time => time.Casa == teamCasa && time.Visitante == teamVisitante);
             if (verification != null)
             {
                 var currentMatch = new Partida(teamCasa, teamVisitante);

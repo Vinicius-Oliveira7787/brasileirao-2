@@ -2,14 +2,14 @@ namespace Domain
 {
     public class Partida
     {
-        public TimeVisitante TimeVisitante{ get; private set; }
+        public TimeVisitante Visitante{ get; private set; }
 
-        public TimeCasa TimeDaCasa{ get; private set; }
+        public TimeCasa Casa{ get; private set; }
 
         public Partida(TimeCasa casa, TimeVisitante visitante)
         {
-            this.TimeDaCasa = casa;
-            this.TimeVisitante = visitante;
+            this.Casa = casa;
+            this.Visitante = visitante;
         }
     }
 }

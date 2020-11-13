@@ -1,4 +1,7 @@
-﻿namespace Domain.Players
+﻿using System;
+using System.Linq;
+
+namespace Domain.Players
 {
     public class PlayersService
     {
@@ -14,6 +17,19 @@
             }
 
             return new CreatedPlayerDTO(playerValidation.errors);
+        }
+
+        public CreatedPlayerDTO Update(string name, Guid playerId)
+        {
+            var player = new Player(name);
+            var playerValidation = player.Validate();
+
+            if (playerValidation.isValid)
+            {
+                var playerToRemove = PlayersRepository.Players.FirstOrDefault(item => item.Id == playerId).Id;
+                PlayersRepository.Remove(playerToRemove);
+                PlayersRepository.Add(player);
+            }
         }
     }
 }

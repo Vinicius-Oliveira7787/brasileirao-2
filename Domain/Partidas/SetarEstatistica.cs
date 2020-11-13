@@ -6,24 +6,24 @@ namespace Domain
     {
         public SetarEstatistica(Partida partida)
         {
-            if (partida.TimeDaCasa.TimeCasaGols > partida.TimeVisitante.TimeVisitanteGols)
+            if (partida.Casa.TimeCasaGols > partida.Visitante.TimeVisitanteGols)
             {
-                partida.TimeDaCasa.TimeDaCasa.AdicionarVitoria();
-                partida.TimeDaCasa.TimeDaCasa.AtualizarPorcentagemDeAproveitamento();
-                partida.TimeVisitante.TeamVisitante.AdicionarDerrota();
+                partida.Casa.TimeDaCasa.AdicionarVitoria();
+                partida.Casa.TimeDaCasa.AtualizarPorcentagemDeAproveitamento();
+                partida.Visitante.TeamVisitante.AdicionarDerrota();
             }
 
-            else if (partida.TimeDaCasa.TimeCasaGols < partida.TimeVisitante.TimeVisitanteGols)
+            else if (partida.Casa.TimeCasaGols < partida.Visitante.TimeVisitanteGols)
             {
-                partida.TimeVisitante.TeamVisitante.AdicionarVitoria();
-                partida.TimeVisitante.TeamVisitante.AtualizarPorcentagemDeAproveitamento();
-                partida.TimeDaCasa.TimeDaCasa.AdicionarDerrota();
+                partida.Visitante.TeamVisitante.AdicionarVitoria();
+                partida.Visitante.TeamVisitante.AtualizarPorcentagemDeAproveitamento();
+                partida.Casa.TimeDaCasa.AdicionarDerrota();
             }
 
-            else if (partida.TimeDaCasa.TimeCasaGols == partida.TimeVisitante.TimeVisitanteGols)
+            else if (partida.Casa.TimeCasaGols == partida.Visitante.TimeVisitanteGols)
             {
-                partida.TimeDaCasa.TimeDaCasa.AdicionarEmpate();
-                partida.TimeVisitante.TeamVisitante.AdicionarEmpate();
+                partida.Casa.TimeDaCasa.AdicionarEmpate();
+                partida.Visitante.TeamVisitante.AdicionarEmpate();
             }
         }
     }
