@@ -52,8 +52,7 @@ namespace WebAPI.Controllers.Players
             return Ok(response.Id);
         }
 
-        [HttpPut]
-        [Route("{id}")]
+        [HttpPut("{id}")]
         public IActionResult Update(Guid id, CreatePlayerRequest request)
         {
             StringValues userId;
@@ -76,6 +75,38 @@ namespace WebAPI.Controllers.Players
             }
 
             var response = _playersService.Update(request.Name);
+
+            if (!response.IsValid)
+            {
+                return BadRequest(response.Errors);
+            }
+            
+            return Ok(response.Id);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Remove(Guid id, CreatePlayerRequest request)
+        {
+            StringValues userId;
+            if(!Request.Headers.TryGetValue("UserId", out userId))
+            {
+                return Unauthorized();
+            }
+
+            var user = _usersService.GetById(Guid.Parse(userId));
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            if (user.Profile == Profile.Supporter)
+            {
+                return Unauthorized();
+                // return Forbid("Test");
+            }
+
+            var response = _playersService.Remove(request.Name);
 
             if (!response.IsValid)
             {
