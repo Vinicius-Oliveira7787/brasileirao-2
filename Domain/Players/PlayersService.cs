@@ -26,8 +26,8 @@ namespace Domain.Players
 
             if (playerValidation.isValid)
             {
-                var playerToRemove = PlayersRepository.Players.FirstOrDefault(item => item.Id == playerId).Id;
-                PlayersRepository.Remove(playerToRemove);
+                var playerToRemove = PlayersRepository.Players.FirstOrDefault(item => item.Id == playerId);
+                PlayersRepository.Remove(playerToRemove.Id);
                 PlayersRepository.Add(player);
             }
         }
