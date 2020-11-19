@@ -68,13 +68,12 @@ namespace WebAPI.Controllers.Players
                 return Unauthorized();
             }
 
-            if (user.Profile == Profile.Supporter)
+            if (user.Profile != Profile.CBF)
             {
                 return Unauthorized();
-                // return Forbid("Test");
             }
 
-            var response = _playersService.Update(request.Name);
+            var response = _playersService.Update(id, request.Name);
 
             if (!response.IsValid)
             {
@@ -85,7 +84,7 @@ namespace WebAPI.Controllers.Players
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Remove(Guid id, CreatePlayerRequest request)
+        public IActionResult Remove(Guid id)
         {
             StringValues userId;
             if(!Request.Headers.TryGetValue("UserId", out userId))
@@ -100,20 +99,19 @@ namespace WebAPI.Controllers.Players
                 return Unauthorized();
             }
 
-            if (user.Profile == Profile.Supporter)
+            if (user.Profile != Profile.CBF)
             {
                 return Unauthorized();
-                // return Forbid("Test");
             }
 
-            var response = _playersService.Remove(request.Name);
+            var playerRemoved = _playersService.Remove(id);
 
-            if (!response.IsValid)
+            if (playerRemoved == null)
             {
-                return BadRequest(response.Errors);
+                return NotFound();
             }
             
-            return Ok(response.Id);
+            return NoContent();
         }
     }
 }

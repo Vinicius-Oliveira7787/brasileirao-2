@@ -16,13 +16,13 @@ namespace Domain.Players
 
         public static Guid? Remove(Guid id)
         {
-            var player = _players.FirstOrDefault(jogador => jogador.Id == id);
-            if (player == null)
-            {
+            var player = _players.FirstOrDefault(x => x.Id == id);
+            if (player == null){
                 return null;
             }
 
             _players.Remove(player);
+            return id;
         }
     }
 }
