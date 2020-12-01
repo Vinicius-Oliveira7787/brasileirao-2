@@ -1,21 +1,79 @@
-# brasileirao-2.0
+# entra21-rest
 
-#### R1. As funcionalidades do sistema deverão ser protegidas, apenas os usuários permitidos poderão acessá-las.
+## Criando a pasta e o projeto WebAPI
+```
+md WebAPI
+```
+```
+cd WebAPI
+```
+```
+dotnet new webapi
+```
 
-#### R2. Cada usuário terá um único perfil, sendo ele o perfil “Torcedor” ou “CBF”. O perfil Torcedor fará operações comuns, enquanto o perfil CBF terá todas as permissões do Torcedor, e mais aquelas que são de função administrativa.
+## Para rodar o projeto:
+```
+dotnet run
+```
 
-#### R3. Os times que farão parte do campeonato devem ser cadastrados, após o cadastro não será possível modificar os clubes participantes, a quantidade de clubes cadastrados deve ser maior que 7. (CBF)
+Recurso: Usuario
+## Para obter um recurso da API
+#### Retornará TODOS os usuários:
+```
+GET
+https://localhost:5001/users
+```
 
-#### R4. O campeonato deve gerar automaticamente os confrontos entre os times.
+#### Retornará o usuário de ID 1:
+```
+GET
+https://localhost:5001/users/1
+```
 
-#### R5. Após os confrontos serem gerados, será necessário que o resultado dos jogos sejam informados, rodada por rodada. (CBF)
+#### Para criar um novo usuário:
+```
+POST
+https://localhost:5001/users
+{
+    "name": "Maria",
+    "age": 18
+}
+```
 
-#### R6. Cada time pode remover ou adicionar jogadores durante o decorrer do campeonato, tendo um limite mínimo e máximo de, respectivamente, 16 e 32 jogadores. (CBF)
+## Banco de dados
 
-#### R7. O campeonato deve apresentar a tabela atualizada da pontuação dos clubes, contendo os seguintes dados: Pontuação; Partidas disputadas; Vitórias; Empates; Derrotas; Saldo de gols; Gols pró; Gols contra; Porcentagem de aproveitamento (Torcedor)
+### Para rodar o banco de dados
+```
+docker-compose up
+```
 
-#### R8. O campeonato deve apresentar a relações dos artilheiros. (Torcedor)
+### Para conectar no SQL Server através da extensão do SQL Server
+localhost
+enter
+enter
+sa
+senha
+enter
+enter
 
-#### R9. O campeonato deve fornecer os resultados de cada rodada (Torcedor)
+### Instalando bibliotecas para a aplicação conectar no banco de dados
+```
+dotnet add package Microsoft.EntityFrameworkCore --version 5.0.0
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.0
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.0
+```
 
-#### R10. O campeonato deve apresentar a relação dos times rebaixados (4 últimos) e classificados para a libertadores (4 primeiros) (Torcedor)
+### Iremos utilizar a ORM EntityFramework
+Object
+Relational
+Mapping
+
+## Queries
+### Criar banco de dados
+```
+CREATE DATABASE Brasileirao
+```
+### Deletar banco de dados
+```
+DROP DATABASE Brasileirao
+```

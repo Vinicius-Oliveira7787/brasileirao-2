@@ -4,9 +4,9 @@ namespace Domain.Players
 {
     public class PlayersService
     {
-        public CreatedPlayerDTO Create(string name)
+        public CreatedPlayerDTO Create(string name, string teamName)
         {
-            var player = new Player(name);
+            var player = new Player(name, teamName);
             var playerValidation = player.Validate();
 
             if (playerValidation.isValid)
@@ -18,9 +18,9 @@ namespace Domain.Players
             return new CreatedPlayerDTO(playerValidation.errors);
         }
 
-        public CreatedPlayerDTO Update(Guid id, string name)
+        public CreatedPlayerDTO Update(Guid id, string name, string teamName)
         {
-            var player = new Player(name);
+            var player = new Player(name, teamName);
             var playerValidation = player.Validate();
 
             if (playerValidation.isValid)

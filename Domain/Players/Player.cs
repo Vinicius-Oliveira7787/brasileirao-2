@@ -9,8 +9,12 @@ namespace Domain.Players
     {
         public Guid Id { get; private set; } = Guid.NewGuid();
         public int Goals { get; private set; }
+        public string TeamName { get; private set; }
 
-        public Player(string name) : base(name) {}
+        public Player(string name, string teamName) : base(name) 
+        {
+            TeamName = teamName;
+        }
 
         public (IList<string> errors, bool isValid) Validate()
         {

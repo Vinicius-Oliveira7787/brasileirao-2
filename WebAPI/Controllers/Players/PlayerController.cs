@@ -11,14 +11,8 @@ namespace WebAPI.Controllers.Players
     [Route("[controller]")]
     public class PlayersController : ControllerBase
     {
-        private readonly PlayersService _playersService;
-        private readonly UsersService _usersService;
-        
-        public PlayersController()
-        {
-            _usersService = new UsersService();
-            _playersService = new PlayersService();
-        }
+        private readonly PlayersService _playersService = new PlayersService();
+        private readonly UsersService _usersService = new UsersService();
 
         [HttpPost]
         public IActionResult Create(CreatePlayerRequest request)
@@ -28,7 +22,7 @@ namespace WebAPI.Controllers.Players
             {
                 return Unauthorized();
             }
-
+            
             var user = _usersService.GetById(Guid.Parse(userId));
 
             if (user == null)
@@ -42,7 +36,7 @@ namespace WebAPI.Controllers.Players
                 // return Forbid("Test");
             }
 
-            var response = _playersService.Create(request.Name);
+            var response = _playersService.Create(request.Name, request.TeamName);
 
             if (!response.IsValid)
             {
