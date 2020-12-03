@@ -1,13 +1,15 @@
 using System;
 using System.Collections.Generic;
+using Domain.Players;
 
-namespace Domain.Team
+namespace Domain.Teams
 {
     public class Team
     {
         public Guid Id { get; private set; } = Guid.NewGuid();
         public string Name { get; private set; }
         public int Gols { get; private set; } = 0;
+        public List<Player> Players { get; set; } = new List<Player>();
 
         public Team(string name)
         {

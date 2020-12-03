@@ -47,6 +47,16 @@ https://localhost:5001/users
 docker-compose up
 ```
 
+### Para rodar o banco de dados (desanexanco do terminal)
+```
+docker-compose up -d
+```
+
+### Para parar o container do banco de dados
+```
+docker-compose down
+```
+
 ### Para conectar no SQL Server através da extensão do SQL Server
 localhost
 enter
@@ -71,9 +81,70 @@ Mapping
 ## Queries
 ### Criar banco de dados
 ```
-CREATE DATABASE Brasileirao
+CREATE DATABASE <banco>
 ```
 ### Deletar banco de dados
 ```
-DROP DATABASE Brasileirao
+USE master;
+DROP DATABASE <banco>
+```
+### Deletar todos registros
+```
+DELETE FROM <tabela>
+```
+### Deletar uma tabela
+```
+DROP TABLE <tabela>
+```
+
+# Docker
+Gerencionador de containers
+
+## DockerHub (Parecido com o site do NuGet)
+Repositório de imagens
+
+## Docker-compose
+Ferramenta para auxiliar a criação de containers em ambiente de DESENVOLVIMENTO
+
+## Image (Parecido com ISO)
+Modelo de container
+
+## Container (Parecido com a máquina virtual)
+Um sistema operacional que roda apartado dentro da sua máquina
+Nós temos um Windows 10, temos um container rodando com Alpine Linux dentro da nossa máquina
+
+### Listar os containers que estão rodando
+```
+docker container ls
+```
+
+### Listar todos os containers
+```
+docker container ls -a
+```
+
+### Remover um container
+```
+docker container rm <container_id>
+```
+
+## Migrations
+### Adicionar um novo pacote do EF no projeto Domain
+```
+dotnet add package Microsoft.EntityFrameworkCore.Tools
+```
+
+### Instalar a cli de migrations como ferramenta global (para ser usado via terminal)
+```
+dotnet tool install --global dotnet-ef
+```
+
+### Rodar a primeira migração (será lido todas as tabelas registradas via DBSet)
+```
+dotnet ef migrations add InitialCreate
+```
+
+### Rodar as migrações (atualizar o banco de dados)
+```
+dotnet ef database update
 ```

@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using Domain.Players;
 
-namespace Domain.Team
+namespace Domain.Teams
 {
     public class TeamService
     {
