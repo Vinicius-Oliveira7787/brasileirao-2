@@ -1,28 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Players;
+using Domain.Teams;
 using Microsoft.Extensions.Primitives;
-using System;
-using Microsoft.AspNetCore.Authentication;
 using Domain.Users;
+using System;
 
-namespace WebAPI.Controllers.Players
+namespace WebAPI.Controllers.Teams
 {
     [ApiController]
     [Route("[controller]")]
-    public class PlayersController : ControllerBase
+    public class TeamsController : ControllerBase
     {
-        private readonly PlayersService _playersService = new PlayersService();
-        private readonly UsersService _usersService = new UsersService();
+        private readonly ITeamsService _teamsService;
+        private readonly IUsersService _usersService;
+        
+        public TeamsController(IUsersService usersService, ITeamsService teamsService)
+        {
+            _usersService = usersService;
+            _teamsService = teamsService;
+        }
 
         [HttpPost]
-        public IActionResult Create(CreatePlayerRequest request)
+        public IActionResult Create(CreateTeamRequest request)
         {
             StringValues userId;
             if(!Request.Headers.TryGetValue("UserId", out userId))
             {
                 return Unauthorized();
             }
-            
+
             var user = _usersService.GetById(Guid.Parse(userId));
 
             if (user == null)
@@ -33,10 +38,9 @@ namespace WebAPI.Controllers.Players
             if (user.Profile == Profile.Supporter)
             {
                 return Unauthorized();
-                // return Forbid("Test");
             }
 
-            var response = _playersService.Create(request.Name, request.TeamName);
+            var response = _teamsService.Create(request.Name, request.Players);
 
             if (!response.IsValid)
             {

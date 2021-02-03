@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Domain.Users;
 using System;
+using Microsoft.Extensions.Primitives;
 
 namespace WebAPI.Controllers.Users
 {
@@ -8,29 +9,47 @@ namespace WebAPI.Controllers.Users
     [Route("[controller]")]
     public class UsersController : ControllerBase
     {
-        private readonly UsersService _usersService;
+        private readonly IUsersService _usersService;
         
-        public UsersController()
+        public UsersController(IUsersService usersService)
         {
-            _usersService = new UsersService();
+            _usersService = usersService;
         }
 
         [HttpPost]
         public IActionResult Create(CreateUserRequest request)
         {
-            if(request.Profile == Profile.CBF && request.Password != "admin123")
+            StringValues userId;
+            if(!Request.Headers.TryGetValue("UserId", out userId))
             {
                 return Unauthorized();
             }
-            
-            var response = _usersService.Create(request.Name, request.Profile);
+
+            var user = _usersService.GetById(Guid.Parse(userId));
+
+            if (user == null)
+            {
+                return Unauthorized();
+            }
+
+            if (user.Profile == Profile.Supporter)
+            {
+                return Unauthorized();
+            }
+
+            var response = _usersService.Create(
+                request.Name,
+                request.Profile,
+                request.Email,
+                request.Password
+            );
 
             if (!response.IsValid)
             {
                 return BadRequest(response.Errors);
             }
             
-            return Ok(response.Id);
+            return NoContent();
         }
 
         [HttpGet("{id}")]

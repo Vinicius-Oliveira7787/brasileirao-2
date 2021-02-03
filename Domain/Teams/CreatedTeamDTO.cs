@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Domain.Teams
@@ -17,6 +17,8 @@ namespace Domain.Teams
 
         public CreatedTeamDTO(IList<string> errors)
         {
+            // esta atribuição não é necessária pois isValid é false por padrão
+            IsValid = false;
             Errors = errors;
         }
     }

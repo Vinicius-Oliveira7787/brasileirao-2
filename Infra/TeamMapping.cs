@@ -2,7 +2,7 @@ using Domain.Teams;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Domain.Infra
+namespace Infra
 {
     public class TeamMapping : IEntityTypeConfiguration<Team>
     {
@@ -11,7 +11,7 @@ namespace Domain.Infra
             builder
                 .Property(team => team.Name)
                 .IsRequired()
-                .HasMaxLength(100);
+                .HasMaxLength(80);
         }
     }
 }

@@ -1,14 +1,29 @@
 ﻿using System;
+using Domain.Common;
 
 namespace Domain.Users
 {
-    public class UsersService
+    // Esta classe está IMPLEMENTANDO a interface IUsersService
+    public class UsersService : IUsersService
     {
-        private readonly UsersRepository _usersRepository = new UsersRepository();
+        private readonly IUsersRepository _usersRepository;
 
-        public CreatedUserDTO Create(string name, Profile profile)
+        public UsersService(IUsersRepository usersRepository)
         {
-            var user = new User(name, profile);
+            _usersRepository = usersRepository;
+        }
+
+        public CreatedUserDTO Create(
+            string name,
+            Profile profile,
+            string email,
+            string password
+        )
+        {
+            var crypt = new Crypt();
+            var cryptPassword = crypt.CreateMD5(password);
+            
+            var user = new User(name, cryptPassword, email, profile);
             var userValidation = user.Validate();
 
             if (userValidation.isValid)
@@ -22,7 +37,7 @@ namespace Domain.Users
         
         public User GetById(Guid id)
         {
-            return _usersRepository.GetById(id);
+            return _usersRepository.Get(id);
         }
     }
 }

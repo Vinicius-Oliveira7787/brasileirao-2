@@ -1,26 +1,30 @@
 ﻿using System;
-using System.Linq;
-using Domain.Infra;
+using Domain.Common;
 
 namespace Domain.Users
 {
-    class UsersRepository
+    public class UsersRepository : IUsersRepository
     {
-        public void Add(User user)
+        private readonly IRepository<User> _repository;
+
+        public UsersRepository(IRepository<User> repository)
         {
-            using (var db = new BrasileiraoContext())
-            {
-                db.Users.Add(user);
-                db.SaveChanges();
-            }
+            _repository = repository;
         }
 
-        public User GetById(Guid id)
+        public void Add(User user)
         {
-            using (var db = new BrasileiraoContext())
-            {
-                return db.Users.FirstOrDefault(x => x.Id == id);
-            }
+            _repository.Add(user);
+        }
+
+        public User Get(Func<User, bool> predicate)
+        {
+            return _repository.Get(predicate);
+        }
+
+        public User Get(Guid id)
+        {
+            return _repository.Get(id);
         }
     }
 }
