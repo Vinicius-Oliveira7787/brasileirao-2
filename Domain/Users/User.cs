@@ -27,17 +27,6 @@ namespace Domain.Users
                 @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
                 RegexOptions.IgnoreCase
             );
-
-            // try
-            // {
-            //     MailAddress m = new MailAddress(Email);
-
-            //     return true;
-            // }
-            // catch (FormatException)
-            // {
-            //     return false;
-            // }
         }
 
         public (IList<string> errors, bool isValid) Validate()
