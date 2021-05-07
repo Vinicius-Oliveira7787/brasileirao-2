@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
 using Domain.People;
 
@@ -8,12 +7,12 @@ namespace Domain.Users
 {
     public class User : Person
     {
-        public Profile Profile { get; set; }
+        public UserProfile Profile { get; set; }
         public string Password { get; set; }
         // Transformar em VO
         public string Email { get; set; }
 
-        public User(string name, string password, string email, Profile profile) : base(name)
+        public User(string name, string password, string email, UserProfile profile) : base(name)
         {
             Password = password;
             Email = email;
@@ -27,6 +26,17 @@ namespace Domain.Users
                 @"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z",
                 RegexOptions.IgnoreCase
             );
+
+            // try
+            // {
+            //     MailAddress m = new MailAddress(Email);
+
+            //     return true;
+            // }
+            // catch (FormatException)
+            // {
+            //     return false;
+            // }
         }
 
         public (IList<string> errors, bool isValid) Validate()

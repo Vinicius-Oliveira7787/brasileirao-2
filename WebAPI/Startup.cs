@@ -1,14 +1,23 @@
+using Domain.Common;
 using Infra;
 using Domain.Users;
-using Domain.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Domain.Teams;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+using Microsoft.IdentityModel.Tokens;
 using Domain.Authentication;
-using Microsoft.EntityFrameworkCore;
+using Domain.Players;
+using Domain.TeamPlayers;
+using FluentValidation.AspNetCore;
+using WebAPI.Controllers.Users;
+using Infra.Repositories;
+using System;
 
 namespace WebAPI
 {
@@ -37,15 +46,48 @@ namespace WebAPI
                 );
             });
 
-            services.AddControllers();
+            services
+                .AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserValidator>());
+            
+            var privateKey = Environment.GetEnvironmentVariable("private_key", EnvironmentVariableTarget.Machine);
+            if (string.IsNullOrEmpty(privateKey))
+            {
+                privateKey = Environment.GetEnvironmentVariable("private_key", EnvironmentVariableTarget.Process);
+            }
+
+            var key = Encoding.ASCII.GetBytes(privateKey);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
 
             // services.AddSingleton(typeof (IRepository<>), typeof (RepositoryInMemory<>));
             services.AddScoped(typeof (IRepository<>), typeof (Repository<>));
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<ITeamsRepository, TeamsRepository>();
+            services.AddScoped<ITeamPlayersRepository, TeamPlayersRepository>();
             services.AddScoped<ITeamsService, TeamsService>();
+            services.AddScoped<IPlayersRepository, PlayersRepository>();
+            services.AddScoped<IPlayersService, PlayersService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ICrypt, Crypt>();
+            services.AddScoped<ITokenService, TokenService>();
+            services.AddDbContext<BrasileiraoContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +97,7 @@ namespace WebAPI
             using (var db = new BrasileiraoContext())
             {
                 // Este comando irá criar o banco de dados (quando ele ainda não existir)
+                // Também executará todas as migrations e seeders
                 db.Database.Migrate();
             }
 
@@ -67,6 +110,7 @@ namespace WebAPI
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

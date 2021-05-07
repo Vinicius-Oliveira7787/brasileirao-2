@@ -2,5 +2,7 @@
 
 namespace Domain.Users
 {
-    public interface IUsersRepository : IRepository<User> {}
+    public interface IUsersRepository : IRepository<User>
+    {
+    }
 }

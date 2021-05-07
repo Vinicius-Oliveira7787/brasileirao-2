@@ -7,21 +7,22 @@ namespace Domain.Users
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
+        private readonly ICrypt _crypt;
 
-        public UsersService(IUsersRepository usersRepository)
+        public UsersService(IUsersRepository usersRepository, ICrypt crypt)
         {
             _usersRepository = usersRepository;
+            _crypt = crypt;
         }
 
         public CreatedUserDTO Create(
             string name,
-            Profile profile,
+            UserProfile profile,
             string email,
             string password
         )
         {
-            var crypt = new Crypt();
-            var cryptPassword = crypt.CreateMD5(password);
+            var cryptPassword = _crypt.CreateMD5(password);
             
             var user = new User(name, cryptPassword, email, profile);
             var userValidation = user.Validate();

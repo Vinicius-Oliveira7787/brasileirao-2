@@ -10,38 +10,19 @@ namespace WebAPI.Controllers.Players
     [Route("[controller]")]
     public class PlayersController : ControllerBase
     {
-        private readonly PlayersService _playersService;
+        private readonly IPlayersService _playersService;
         private readonly IUsersService _usersService;
         
-        public PlayersController(IUsersService usersService)
+        public PlayersController(IUsersService usersService, IPlayersService playersService)
         {
             _usersService = usersService;
-            _playersService = new PlayersService();
+            _playersService = playersService;
         }
 
         [HttpPost]
         public IActionResult Create(CreatePlayerRequest request)
         {
-            StringValues userId;
-            if(!Request.Headers.TryGetValue("UserId", out userId))
-            {
-                return Unauthorized();
-            }
-
-            var user = _usersService.GetById(Guid.Parse(userId));
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            if (user.Profile == Profile.Supporter)
-            {
-                return Unauthorized();
-                // return Forbid("Test");
-            }
-
-            var response = _playersService.Create(request.TeamId, request.Name);
+           var response = _playersService.Create(request.TeamId, request.Name);
 
             if (!response.IsValid)
             {
@@ -49,37 +30,6 @@ namespace WebAPI.Controllers.Players
             }
             
             return Ok(response.Id);
-        }
-
-        [HttpDelete("{id}")]
-        public IActionResult Remove(Guid id)
-        {
-            StringValues userId;
-            if(!Request.Headers.TryGetValue("UserId", out userId))
-            {
-                return Unauthorized();
-            }
-
-            var user = _usersService.GetById(Guid.Parse(userId));
-
-            if (user == null)
-            {
-                return Unauthorized();
-            }
-
-            if (user.Profile != Profile.CBF)
-            {
-                return Unauthorized();
-            }
-
-            var playerRemoved = _playersService.Remove(id);
-
-            if (playerRemoved == null)
-            {
-                return NotFound();
-            }
-            
-            return NoContent();
         }
     }
 }
