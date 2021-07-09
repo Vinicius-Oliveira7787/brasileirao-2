@@ -1,4 +1,4 @@
-namespace WebAPI.Controllers.Teams
+namespace Brasileirao.Api.Client.Requests
 {
     public class CreateTeamRequest
     {

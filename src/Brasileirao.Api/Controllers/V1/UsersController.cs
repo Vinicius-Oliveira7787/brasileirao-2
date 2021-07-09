@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Users;
 using System;
-using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Brasileirao.Services.Users;
+using Brasileirao.Api.Client.Requests;
+using Brasileirao.Api.Client.Exceptions;
 
 namespace WebAPI.Controllers.Users
 {
@@ -18,36 +19,36 @@ namespace WebAPI.Controllers.Users
         }
 
         [HttpPost]
-        [Authorize(Roles = "CBF")]
         public IActionResult Create(CreateUserRequest request)
         {
-            var response = _usersService.Create(
+            throw new NotFoundException("not found test");
+            _usersService.Create(
                 request.Name,
                 request.Profile,
                 request.Email,
                 request.Password
             );
 
-            if (!response.IsValid)
-            {
-                return BadRequest(response.Errors);
-            }
-            
             return NoContent();
         }
 
         [HttpGet("me")]
-        [Authorize]
         public IActionResult GetById()
         {
+            throw new BusinessException("BusinessException test");
+        }
+
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            throw new Exception("Exception test");
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var user = _usersService.GetById(Guid.Parse(userId));
-            
+
             if (user == null)
             {
                 return NotFound();
             }
-            
             return Ok(user);
         }
     }

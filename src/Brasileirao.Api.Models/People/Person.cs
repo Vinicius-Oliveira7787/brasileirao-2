@@ -1,10 +1,8 @@
-using System;
 using System.Linq;
-using Domain.Common;
+using Brasileirao.Api.Models.Common;
 
-namespace Domain.People
+namespace Brasileirao.Api.Models.People
 {
-    // abstract pois não deveríamos instanciar a classe Person
     public abstract class Person : Entity
     {
         public string Name { get; protected set; }
@@ -14,7 +12,6 @@ namespace Domain.People
             Name = name;
         }
 
-        // Este método continua sendo privado, porém é acessível pelos filhos
         protected bool ValidateName()
         {
             if (string.IsNullOrEmpty(Name))

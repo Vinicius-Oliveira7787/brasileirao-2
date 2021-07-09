@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using Domain.People;
-using Domain.TeamPlayers;
+using Brasileirao.Api.Models.People;
 
-namespace Domain.Players
+namespace Brasileirao.Api.Models.Entities
 {
     public class Player : Person
     {
         public int Goals { get; private set; }
-        // A propriedade virtual indica ao EF que é uma propriedade de navegação
         public virtual IList<TeamPlayer> Teams { get; set; } = new List<TeamPlayer>();
 
         public Player(string name) : base(name)

@@ -1,4 +1,4 @@
-﻿namespace Domain.Users
+﻿namespace Brasileirao.Api.Models.Enums
 {
     public enum UserProfile
     {

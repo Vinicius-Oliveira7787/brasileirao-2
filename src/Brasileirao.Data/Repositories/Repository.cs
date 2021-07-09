@@ -2,10 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Domain.Common;
+using Brasileirao.Api.Models.Common;
+using Brasileirao.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infra.Repositories
+namespace Brasileirao.Data.Repositories
 {
     public class Repository<T> : IRepository<T> where T : Entity
     {
@@ -18,7 +19,7 @@ namespace Infra.Repositories
 
         public void Add(T entity)
         {
-            brasileiraoContext.Add<T>(entity);
+            brasileiraoContext.Add(entity);
             brasileiraoContext.SaveChanges();
         }
 
@@ -35,6 +36,21 @@ namespace Infra.Repositories
         public T Get(Guid id)
         {
             return Get(x => x.Id == id);
+        }
+
+        public void Delete(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(T updatedEntity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<T> GetAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Domain.Common;
-using Domain.TeamPlayers;
+using Brasileirao.Api.Models.Common;
 
-namespace Domain.Teams
+namespace Brasileirao.Api.Models.Entities
 {
     public class Team : Entity
     {
@@ -16,7 +15,7 @@ namespace Domain.Teams
             Name = name;
         }
 
-        protected Team() {}
+        protected Team() { }
 
         protected bool ValidateName()
         {

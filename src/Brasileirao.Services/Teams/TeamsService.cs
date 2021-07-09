@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using Brasileirao.Api.Models.Entities;
+using Infra.Repositories;
+using System.Collections.Generic;
 
-namespace Domain.Teams
+namespace Brasileirao.Services.Teams
 {
     public class TeamsService : ITeamsService
     {
@@ -10,18 +12,14 @@ namespace Domain.Teams
             _teamsRepository = teamsRepository;
         }
 
-        public CreatedTeamDTO Create(string name)
+        public void Create(string name)
         {
             var team = new Team(name);
-            var TeamValidation = team.Validate();
 
-            if (TeamValidation.isValid)
+            if (team.Validate().isValid)
             {
                 _teamsRepository.Add(team);
-                return new CreatedTeamDTO(team.Id);
             }
-
-            return new CreatedTeamDTO(TeamValidation.errors);
         }
 
         public IList<Team> GetAll()

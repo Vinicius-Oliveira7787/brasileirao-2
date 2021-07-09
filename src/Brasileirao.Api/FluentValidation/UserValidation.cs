@@ -1,10 +1,11 @@
+using Brasileirao.Api.Client.Requests;
 using FluentValidation;
 
 namespace WebAPI.Controllers.Users
 {
-    public class CreateUserValidator : AbstractValidator<CreateUserRequest>
+    public class UserValidation : AbstractValidator<CreateUserRequest>
     {
-        public CreateUserValidator()
+        public UserValidation()
         {
             RuleFor(x => x.Name)
                 .MinimumLength(5)
@@ -14,7 +15,7 @@ namespace WebAPI.Controllers.Users
 
             RuleFor(x => x.Password)
                 .MinimumLength(5)
-                .MaximumLength(80)
+                .MaximumLength(30)
                 .NotEmpty()
                 .NotNull();
 

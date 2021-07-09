@@ -1,6 +1,6 @@
-using Domain.Users;
+using Brasileirao.Api.Models.Enums;
 
-namespace WebAPI.Controllers.Users
+namespace Brasileirao.Api.Client.Requests
 {
     public class CreateUserRequest
     {

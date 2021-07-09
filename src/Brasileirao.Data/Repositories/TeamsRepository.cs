@@ -1,7 +1,9 @@
 ﻿
 using System.Collections.Generic;
 using System.Linq;
-using Domain.Teams;
+using Brasileirao.Api.Models.Entities;
+using Brasileirao.Data;
+using Brasileirao.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories

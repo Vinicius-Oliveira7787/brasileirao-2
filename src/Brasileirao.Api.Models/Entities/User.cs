@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Domain.People;
+using Brasileirao.Api.Models.Enums;
+using Brasileirao.Api.Models.People;
 
-namespace Domain.Users
+namespace Brasileirao.Api.Models.Entities
 {
     public class User : Person
     {
         public UserProfile Profile { get; set; }
         public string Password { get; set; }
-        // Transformar em VO
         public string Email { get; set; }
 
         public User(string name, string password, string email, UserProfile profile) : base(name)

@@ -1,6 +1,6 @@
 using System;
 
-namespace WebAPI.Controllers.Players
+namespace Brasileirao.Api.Client.Requests
 {
     public class CreatePlayerRequest
     {

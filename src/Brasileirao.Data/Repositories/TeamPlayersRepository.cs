@@ -1,5 +1,7 @@
 ﻿using System;
-using Domain.TeamPlayers;
+using Brasileirao.Api.Models.Entities;
+using Brasileirao.Data;
+using Brasileirao.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infra.Repositories

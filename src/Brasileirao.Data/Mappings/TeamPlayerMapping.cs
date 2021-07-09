@@ -1,4 +1,4 @@
-using Domain.TeamPlayers;
+using Brasileirao.Api.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

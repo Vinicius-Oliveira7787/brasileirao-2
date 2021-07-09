@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace Domain.Players
+namespace Brasileirao.Services.Players
 {
     public interface IPlayersService
     {
-        CreatedPlayerDTO Create(Guid teamId, string name);
+        void Create(Guid teamId, string name);
     }
 }

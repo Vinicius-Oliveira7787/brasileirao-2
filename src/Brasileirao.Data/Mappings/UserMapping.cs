@@ -1,5 +1,5 @@
-using Domain.Common;
-using Domain.Users;
+using Brasileirao.Api.Models.Entities;
+using Brasileirao.Api.Models.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -9,12 +9,9 @@ namespace Infra.Mappings
     {
         public void Configure(EntityTypeBuilder<User> builder)
         {
-            var crypt = new Crypt();
-            var cryptPassword = crypt.CreateMD5("123");
-
             builder.HasData(new User(
                 "Sys Admin",
-                cryptPassword,
+                "admin123",
                 "sysadmin@company.com",
                 UserProfile.CBF
             ));

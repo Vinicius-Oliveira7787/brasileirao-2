@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Players;
-using Microsoft.Extensions.Primitives;
-using Domain.Users;
-using System;
+using Brasileirao.Services.Players;
+using Brasileirao.Services.Users;
+using Brasileirao.Api.Client.Requests;
 
 namespace WebAPI.Controllers.Players
 {
@@ -22,14 +21,9 @@ namespace WebAPI.Controllers.Players
         [HttpPost]
         public IActionResult Create(CreatePlayerRequest request)
         {
-           var response = _playersService.Create(request.TeamId, request.Name);
-
-            if (!response.IsValid)
-            {
-                return BadRequest(response.Errors);
-            }
+            _playersService.Create(request.TeamId, request.Name);
             
-            return Ok(response.Id);
+            return Ok();
         }
     }
 }

@@ -1,44 +1,37 @@
 ﻿using System;
-using Domain.Common;
+using Brasileirao.Api.Models.Entities;
+using Brasileirao.Api.Models.Enums;
+using Infra.Repositories;
 
-namespace Domain.Users
+namespace Brasileirao.Services.Users
 {
-    // Esta classe está IMPLEMENTANDO a interface IUsersService
     public class UsersService : IUsersService
     {
         private readonly IUsersRepository _usersRepository;
-        private readonly ICrypt _crypt;
 
-        public UsersService(IUsersRepository usersRepository, ICrypt crypt)
+        public UsersService(IUsersRepository usersRepository)
         {
             _usersRepository = usersRepository;
-            _crypt = crypt;
         }
 
-        public CreatedUserDTO Create(
+        public void Create(
             string name,
             UserProfile profile,
             string email,
             string password
         )
         {
-            var cryptPassword = _crypt.CreateMD5(password);
-            
-            var user = new User(name, cryptPassword, email, profile);
-            var userValidation = user.Validate();
+            var user = new User(name, password, email, profile);
 
-            if (userValidation.isValid)
+            if (user.Validate().isValid)
             {
                 _usersRepository.Add(user);
-                return new CreatedUserDTO(user.Id);
             }
-
-            return new CreatedUserDTO(userValidation.errors);
         }
-        
+
         public User GetById(Guid id)
         {
-            return _usersRepository.Get(id);
+            return _usersRepository.Get(x => x.Id == id);
         }
     }
 }

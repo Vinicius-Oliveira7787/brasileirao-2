@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Teams;
-using Domain.Users;
-using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Authorization;
+using Brasileirao.Services.Teams;
+using Brasileirao.Services.Users;
+using Brasileirao.Api.Client.Requests;
 
 namespace WebAPI.Controllers.Teams
 {
@@ -23,19 +22,13 @@ namespace WebAPI.Controllers.Teams
         [HttpPost]
         public IActionResult Create(CreateTeamRequest request)
         {
-            var response = _teamsService.Create(request.Name);
+            _teamsService.Create(request.Name);
 
-            if (!response.IsValid)
-            {
-                return BadRequest(response.Errors);
-            }
-            
-            return Ok(response.Id);
+            return Ok();
         }
 
         [HttpGet]
-        // [Authorize(Roles = "CBF,Supporter")]
-        public IActionResult Get(string name)
+        public IActionResult Get()
         {
             var teams = _teamsService.GetAll();
 
@@ -49,8 +42,9 @@ namespace WebAPI.Controllers.Teams
             
             var resp = teams.Select(x => new {
                 name = x.Name,
-                playersCount = x.Players.Count()
+                playersCount = x.Players.Count
             });
+
             return Ok(resp);
         }
     }

@@ -1,9 +1,7 @@
 using System;
-using Domain.Common;
-using Domain.Players;
-using Domain.Teams;
+using Brasileirao.Api.Models.Common;
 
-namespace Domain.TeamPlayers
+namespace Brasileirao.Api.Models.Entities
 {
     public class TeamPlayer : Entity
     {
@@ -12,7 +10,7 @@ namespace Domain.TeamPlayers
         public virtual Player Player { get; private set; }
         public Guid PlayerId { get; private set; }
 
-        public TeamPlayer(Guid id) : base(id) {}
+        public TeamPlayer(Guid id) : base(id) { }
 
         public TeamPlayer(Guid teamId, Guid playerId)
         {

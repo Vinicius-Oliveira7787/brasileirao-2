@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Brasileirao.Api.Models.Entities;
+using Brasileirao.Api.Models.Enums;
+using System;
 
-namespace Domain.Users
+namespace Brasileirao.Services.Users
 {
     public interface IUsersService
     {
-        CreatedUserDTO Create(
+        void Create(
             string name,
             UserProfile profile,
             string email,

@@ -1,7 +1,7 @@
-﻿
-using Domain.Players;
+﻿using Brasileirao.Api.Models.Entities;
+using Brasileirao.Data.Interfaces;
 
-namespace Infra.Repositories
+namespace Brasileirao.Data.Repositories
 {
     public class PlayersRepository : Repository<Player>, IPlayersRepository
     {

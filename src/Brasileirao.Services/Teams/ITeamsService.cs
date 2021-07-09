@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using Brasileirao.Api.Models.Entities;
+using System.Collections.Generic;
 
-namespace Domain.Teams
+namespace Brasileirao.Services.Teams
 {
     public interface ITeamsService
     {
-        CreatedTeamDTO Create(string name);
+        void Create(string name);
         IList<Team> GetAll();
     }
 }

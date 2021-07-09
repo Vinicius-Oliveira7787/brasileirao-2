@@ -1,7 +1,9 @@
 ﻿using System;
-using Domain.TeamPlayers;
+using Brasileirao.Api.Models.Entities;
+using Brasileirao.Data.Interfaces;
+using Infra.Repositories;
 
-namespace Domain.Players
+namespace Brasileirao.Services.Players
 {
     public class PlayersService : IPlayersService
     {
@@ -14,20 +16,15 @@ namespace Domain.Players
             _teamPlayersRepository = teamPlayersRepository;
         }
 
-        public CreatedPlayerDTO Create(Guid teamId, string name)
+        public void Create(Guid teamId, string name)
         {
             var player = new Player(name);
-            var playerValidation = player.Validate();
 
-            if (playerValidation.isValid)
+            if (player.Validate().isValid)
             {
                 player.AddTeam(teamId);
                 _playersRepository.Add(player);
-
-                return new CreatedPlayerDTO(player.Id);
             }
-
-            return new CreatedPlayerDTO(playerValidation.errors);
         }
     }
 }
