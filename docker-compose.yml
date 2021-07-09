@@ -1,20 +1,16 @@
-# versão do yml
-version: '3'
-# Representa os containers que serão criados
+version: '3.3'
 services:
   db:
-    user: root
-    image: mcr.microsoft.com/mssql/server:2019-latest
-    container_name: brasileirao-sqlserver
-    # Nesta linha estamos espelhando a porta 1433 do container com a porta 1433 da nossa máquina
-    ports:
-      - 1433:1433
-    # Variáveis de ambiente (configurações)
+    container_name: api-brasileirao
+    image: mysql:5.7
     environment:
-      - ACCEPT_EULA=Y
-      - SA_PASSWORD=some(!)Password
-    # espelhamento de pastas entre container e máquina local
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
     volumes:
-      # lado direito é o pasta do container
-      # lado esquerdo pasta da nossa máquina
-      - ./volumes/data:/var/opt/mssql/data
+      - my-db:/var/lib/mysql
+volumes:
+  my-db:
