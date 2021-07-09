@@ -134,6 +134,8 @@ _NCrunch*
 
 .vscode
 src/.vs
+.vs
+.vscode
 
 # docker volumes
 volumes/
